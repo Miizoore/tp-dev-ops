@@ -53,4 +53,8 @@ jobs:
           npm run ci:e2e:run
           npm run ci:e2e:teardown
           
+      - name: deploiement
+        run: ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=pacific-coast-75942
+        
+          
           
