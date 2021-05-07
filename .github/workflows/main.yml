@@ -22,6 +22,7 @@ jobs:
     
     env:
       JHI_E2E_HEADLESS: 'TRUE'
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -52,5 +53,9 @@ jobs:
           npm run ci:e2e:prepare:docker
           npm run ci:e2e:run
           npm run ci:e2e:teardown
+          
+      - name: deploiement
+        run: ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=pacific-coast-75942
+        
           
           
